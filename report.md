@@ -18,3 +18,7 @@ This approach was implemented successfully in Google's MapReduce system, as desc
 
 ## Task 2
 ### 实现方法
+
+### 实验结果
+
+## Task 3

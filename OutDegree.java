@@ -25,7 +25,16 @@ public class OutDegree
 		public void map(Object key, Text value, Context context
 							) throws IOException, InterruptedException 
 		{
-			// TODO
+			// Split the input line
+            StringTokenizer itr = new StringTokenizer(value.toString());
+            if (itr.hasMoreTokens()) {
+                String prefix = itr.nextToken(); // The 'a' prefix
+                if (prefix.equals("a") && itr.hasMoreTokens()) {
+                    String u = itr.nextToken(); // The starting node
+                    word.set(u);
+                    context.write(word, one);
+                }
+            }
 		}
 	}
   
@@ -38,7 +47,12 @@ public class OutDegree
 									Context context
 							) throws IOException, InterruptedException 
 		{
-			// TODO
+			int sum = 0;
+            for (IntWritable val : values) {
+                sum += val.get();
+            }
+            result.set(sum);
+            context.write(key, result);
 		}
 	}
 
