@@ -18,7 +18,19 @@ This approach was implemented successfully in Google's MapReduce system, as desc
 
 ## Task 2
 ### 实现方法
+与WordCount类似，只是对map函数进行了简要的修改，将第二段字符串（即出发端点）作为key、1作为值进行计数。reduce函数没有改变，bash脚本也没有任何修改。
 
 ### 实验结果
+见od_res文件夹下的文件。
 
 ## Task 3
+### 实现方法
+由于case1和case2需要计算得到的最大出度顶点数量不同，在main函数中添加对args[2]的识别及转换，作为待求顶点数量k传入reduce函数。
+主体部分与Task2类似，map直接挪用Task2的map函数。reduce函数中，对于每个key，将其value进行累加，然后将key-value对存入一个priority queue中，队列的大小为k。当队列大小超过k时，将队列中的最小元素弹出，最终队列中的元素即为出度最大的k个顶点。为了保证顺序，将队列中的元素逐个弹出，然后存入一个vector中，并逆序输出。
+bash脚本为“run_tk.sh”，在原有脚本基础上执行时需要额外传入k值。
+
+### 实验结果
+见tk_res文件夹下的文件。
+
+## 一些看法
+感觉本次实验难度并不大，主要时间耗费在熟悉java语言和hadoop框架上。
